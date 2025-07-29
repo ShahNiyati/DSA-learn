@@ -101,6 +101,19 @@ void insertBeforeNode(Node* givenNode, int val){
     givenNode->prev = newNode;
     return;
 }
+
+//Reverse DLL
+Node* reverseDll(Node* head){
+    Node* curr = head;
+    Node* last = nullptr;
+    while(curr!=NULL){
+        last = curr->prev;
+        curr->prev = curr->next;
+        curr->next = last;
+        curr = curr->prev;
+    }
+    return last->prev;
+}
 int main()
 {
     vector<int> arr = {2,3,4,6,7,8,10};
@@ -149,6 +162,12 @@ int main()
     cout<<"I am add 105 before the node which value is 4 : ";
     cout<<endl;
     insertBeforeNode(head->next->next->next,105);
+    printDll(head);
+    cout<<endl;
+
+    //Reverse DLL 
+    head = reverseDll(head);
+    cout<<"Reversed DLL : "<<endl;
     printDll(head);
     cout<<endl;
     return 0;

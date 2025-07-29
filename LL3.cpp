@@ -107,7 +107,32 @@ Node* insertBeforeValue(Node* head ,int el ,int val){
     }
     return head;
 }
-
+Node* reverseLinkedList(Node* head){
+    Node* curr = head;
+    Node* prev = nullptr;
+    if(head==NULL || head->next == NULL){
+        return head;
+    }
+    while(curr!=NULL){
+        Node* nextNode = curr->next;
+        curr->next = prev;
+        prev= curr;
+        curr = nextNode;
+    }
+    return prev;
+}
+bool hasCycle(Node* head){
+    Node* slow = head;
+    Node* fast = head;
+    while(fast!=NULL && fast->next!=NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast){
+            return true;
+        }
+    }
+    return false;
+}
 int main()
 {
     vector<int>arr={5,6,7,8};
@@ -143,5 +168,15 @@ int main()
     cin>>val5;
     head = insertBeforeValue(head,val4,val5);
     print(head);
+    cout<<"Reverse a Linked List"<<endl;
+    head = reverseLinkedList(head);
+    print(head);
+    cout<<"Linked List has cycle ? "<<endl;
+    if(hasCycle(head)){
+        cout<<"Yes!"<<endl;
+    }
+    else{
+        cout<<"No!"<<endl;
+    }
     return 0;
 }
